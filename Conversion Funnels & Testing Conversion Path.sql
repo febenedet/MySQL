@@ -12,33 +12,36 @@
 -- 3) Aggregate the data to assess funmel performance
 
 
-SELECT
-	website_session_id,
+SELECT 
+    website_session_id,
     MAX(products_page) AS products_made_it,
     MAX(mrfuzzy_page) AS mrfuzzy_made_it,
-	MAX(cart_page) AScart_made_it
-
--- SUBQUERY
-
-FROM (
-SELECT 
-	s.website_session_id,
-	pv.pageview_url,
-	pv.created_at as PageView_created_at,
-	CASE WHEN pageview_url = '/products' THEN 1 ELSE 0 END AS products_page,
-	CASE WHEN pageview_url = '/the-original-mr-fuzzy' THEN 1 ELSE 0 END AS mrfuzzy_page,
-	CASE WHEN pageview_url = '/cart' THEN 1 ELSE 0 END AS cart_page
-FROM website_sessions s
-	LEFT JOIN website_pageviews pv on pv.website_session_id = s.website_session_id
-WHERE s.created_at BETWEEN '2014-01-01' AND '2014-02-01' 
-	AND pv.pageview_url IN ('/lander-2', '/products', '/the-original-mr-fuzzy', '/cart')
-ORDER BY
-	s.website_session_id,
-    pv.created_at
-    
-    ) AS pageview_level
-    GROUP BY
-		website_session_id;
+    MAX(cart_page) AScart_made_it
+FROM
+    (SELECT 
+        s.website_session_id,
+            pv.pageview_url,
+            pv.created_at AS PageView_created_at,
+            CASE
+                WHEN pageview_url = '/products' THEN 1
+                ELSE 0
+            END AS products_page,
+            CASE
+                WHEN pageview_url = '/the-original-mr-fuzzy' THEN 1
+                ELSE 0
+            END AS mrfuzzy_page,
+            CASE
+                WHEN pageview_url = '/cart' THEN 1
+                ELSE 0
+            END AS cart_page
+    FROM
+        website_sessions s
+    LEFT JOIN website_pageviews pv ON pv.website_session_id = s.website_session_id
+    WHERE
+        s.created_at BETWEEN '2014-01-01' AND '2014-02-01'
+            AND pv.pageview_url IN ('/lander-2' , '/products', '/the-original-mr-fuzzy', '/cart')
+    ORDER BY s.website_session_id , pv.created_at) AS pageview_level
+GROUP BY website_session_id;
         
         
 CREATE TEMPORARY TABLE sessions_level_made_it_flags_demo
