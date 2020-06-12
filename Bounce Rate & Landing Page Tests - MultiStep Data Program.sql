@@ -1,6 +1,6 @@
 -- 1) Find the FIRST Page View ID for relevant sessions
 -- 2) Identify the landing page for each session
--- 3) Count Page Viwe for each session, identifying bounces
+-- 3) Count Page Viee for each session, identifying bounces
 -- 4) Summarize total sessions and bounced sessions by Landing Page
 
 CREATE TEMPORARY TABLE FindFirstPageView
