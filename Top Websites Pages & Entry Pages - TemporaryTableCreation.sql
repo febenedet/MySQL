@@ -8,12 +8,11 @@ FROM mavenfuzzyfactory.website_pageviews
 GROUP BY website_session_id;
 
 SELECT 
-wpv.pageview_url as LandingPage,
-COUNT(DISTINCT fpv.website_pageview_id) as SessionsHittingThisLander
-
-FROM FirstPageView fpv
-	LEFT JOIN website_pageviews wpv
-		ON fpv.MinPageViewID = wpv.website_pageview_id
-
+    wpv.pageview_url AS LandingPage,
+    COUNT(DISTINCT fpv.website_pageview_id) AS SessionsHittingThisLander
+FROM
+    FirstPageView fpv
+        LEFT JOIN
+    website_pageviews wpv ON fpv.MinPageViewID = wpv.website_pageview_id
 GROUP BY 1
-ORDER BY 1 asc
+ORDER BY 1 ASC
