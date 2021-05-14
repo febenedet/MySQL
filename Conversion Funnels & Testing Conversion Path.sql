@@ -1,15 +1,15 @@
 -- BUSINESS CONTEXT
--- Mini Conversion funnel, from lauder-2 to /cart
+-- Mini Conversion funnel, from "lauder-2" to /cart
 -- Find how many people reach each step, and also dropoff rates
--- Looking ar /lauder-2 traffic only
--- Looking at customers who like Mr Fuzzy only
--- Looking at specifc date range
+-- Looking at "/lauder-2" traffic only
+-- Looking at customers who like Mr. Fuzzy only
+-- Looking at the specific date range
 
 -- STEPS
--- 1) Select all pageviws for relevant sessions
--- 2) Identify each relevant pageview as specific funnel step
+-- 1) Select all pageviews for relevant sessions
+-- 2) Identify each relevant pageview as a specific funnel step
 -- 3) Create the session-level conversion funnel view
--- 3) Aggregate the data to assess funmel performance
+-- 3) Aggregate the data to assess funnel performance
 
 
 SELECT 
